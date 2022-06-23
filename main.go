@@ -66,11 +66,11 @@ func main() {
 	}
 	defer f.Close()
 
-	//time.Sleep(1 * time.Minute) // TODO: REMOVE, just for testing signals
-
 	portsMap := ports.LoadPorts(f)
 
-	// maybe add a get endpoint to query ports?
+	// present the data
+	// TODO: would add a REST endpoint to be able to query ports, as having the data in memory and only print isn't that usefull
+	// for now we just print basic port data
 	if len(portsMap) == 0 {
 		panic("no ports loaded! shutting down service")
 	}
