@@ -1,7 +1,16 @@
 package ports
 
-import "io"
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+)
 
-func LoadPorts(io.Reader) map[string]Port {
-	return map[string]Port{}
+func LoadPorts(data io.Reader) (ports map[string]Port) {
+	err := json.NewDecoder(data).Decode(&ports)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return ports
 }
