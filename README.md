@@ -33,13 +33,13 @@ docker run portservice:v0.1
 
 --- 
 TODO:
-    * Improve memory efficiency of loading function
-    * Save data to a database, chose postgres and set it up in a docker compose
-    * Complete unit tests for main package
-    * Add at least one end-to-end test for the whole process, that is setting a file and then testing that rows in the DB are correct
-    * Add a benchmark for the loading function
-    * Add a GET endpoint to serve ports with pagination and the ability to retrieve any port by its "unlocs" (I believe it corresponds to UN/LOCODE Code)
-    * Add a flag/ environment variable to be able to change the file-name
-    * Add a volume in the dockerfile, to be able to change the input file easily  
-    * Add more documentation
-    * Add kubernetes yaml to be able to deploy to a real production environment
+ * Improve memory efficiency of loading function
+ * Save data to a database, chose postgres and set it up in a docker compose
+ * Complete unit tests for main package
+ * Add at least one end-to-end test for the whole process, that is setting a file and then testing that rows in the DB are correct
+ * Add a benchmark for the loading function
+ * Add a GET endpoint to serve ports with pagination and the ability to retrieve any port by its "unlocs" (I believe it corresponds to UN/LOCODE Code)
+ * Add a flag/ environment variable to be able to change the file-name
+ * Add a volume in the dockerfile, to be able to change the input file easily  
+ * Add more documentation
+ * Add kubernetes yaml to be able to deploy to a real production environment
