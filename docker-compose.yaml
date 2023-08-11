@@ -1,13 +1,9 @@
 version: "3.7"
 
-volumes:
-  pg: {}
-
 services:
   postgres:
     image: postgres:13.4
     volumes:
-      - ./etc/postgres/autoapply:/docker-entrypoint-initdb.d:z
       - pg:/var/lib/postgresql/data
     ports:
       - "5432:5432"
@@ -17,4 +13,36 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: dev
+    healthcheck:
+      test: "pg_isready --username=postgres && psql --username=postgres --list"
+      timeout: 5s
+      retries: 20
     restart: on-failure
+
+  portservice:
+    image: portservice:0.0.1
+    environment:
+      PORT: 8000
+      INGEST_FILE_PATH: "/app/ingest/ports.json"
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: dev
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./ingest:/app/ingest
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.001'
+    #       memory: 200M
+    #     reservations:
+    #       cpus: '0.0001'
+    #       memory: 20M
+
+volumes:
+  ingest: {}
+  pg: {}

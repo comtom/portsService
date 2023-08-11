@@ -21,25 +21,26 @@ go run main.go
 go test ./...
 ```
 
-## How to deploy
+## How to build image
 ```
-docker build . -t portservice:v0.1
+docker build . -t portservice:0.0.1
 ```
 
-### Run it with docker
+### Run it with docker (including database)
 ```
-docker run portservice:v0.1
+docker-compose up -d
+```
+
+### Run it without building an image
+```
+go run ./...
 ```
 
 --- 
 TODO:
- * Improve memory efficiency of loading function
- * Save data to a database, chose postgres and set it up in a docker compose
- * Complete unit tests for main package
+ * Instead of decoding the whole file, traverse it decoding one item at a time
+ * Add more tests
  * Add at least one end-to-end test for the whole process, that is setting a file and then testing that rows in the DB are correct
  * Add a benchmark for the loading function
- * Add a GET endpoint to serve ports with pagination and the ability to retrieve any port by its "unlocs" (I believe it corresponds to UN/LOCODE Code)
- * Add a flag/ environment variable to be able to change the file-name
- * Add a volume in the dockerfile, to be able to change the input file easily  
- * Add more documentation
- * Add kubernetes yaml to be able to deploy to a real production environment
+ * Add documentation
+ * Add a new process that serves the ports API, with a GET endpoint that can filter port by code or by nearest location 
